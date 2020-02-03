@@ -214,6 +214,20 @@ private constructor(builder: Builder) {
     }
   }
 
+  /* enable or disable flash explicitly */
+  fun enableFlash(enable: Boolean){
+    if (camera != null) {
+      try {
+        val param = camera!!.parameters
+        param.flashMode = if (enable) Camera.Parameters.FLASH_MODE_TORCH else Camera.Parameters.FLASH_MODE_OFF
+        camera!!.parameters = param
+        flashmode = state
+      } catch (e: Exception) {
+        e.printStackTrace()
+      }
+    }
+  }
+  
   public fun isFlashOn(): Boolean {
     return flashmode;
   }
